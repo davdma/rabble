@@ -6,7 +6,7 @@ class User(AbstractUser):
     profile_pic = models.TextField(blank=True, null=True)
     short_bio = models.TextField(blank=True, null=True)
     interests = models.TextField(blank=True, null=True)
-    follows = models.ManyToManyField("self", symmetrical=False)
+    follows = models.ManyToManyField("self", symmetrical=False, blank=True)
 
 class Community(models.Model):
     community_name = models.TextField(unique=True)
@@ -18,14 +18,15 @@ class Subrabble(models.Model):
     class Visibility(models.IntegerChoices):
         PUBLIC = 1, "Public"
         PRIVATE = 2, "Private"
+    identifier = models.TextField()
     subrabble_name = models.TextField()
-    description = models.TextField()
+    description = models.TextField(blank=True)
     visibility = models.PositiveSmallIntegerField(choices=Visibility.choices)
     anon_permissions = models.BooleanField()
     community_id = models.ForeignKey(Community, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ['community_id', 'subrabble_name']
+        unique_together = ['community_id', 'identifier']
 
 class Post(models.Model):
     subrabble_id = models.ForeignKey(Subrabble, on_delete=models.CASCADE)
@@ -35,19 +36,18 @@ class Post(models.Model):
     anon = models.BooleanField()
 
 class Comment(models.Model):
-    post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post_id = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     author_id = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     anon = models.BooleanField()
     parent_id = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
 
-class Likes(models.Model):
-    class Likeable(models.IntegerChoices):
-        COMMENT = 1, "Comment"
-        POST = 2, "Post"
-    comment_id = models.ForeignKey(Comment, blank=True, null=True, on_delete=models.CASCADE)
-    post_id = models.ForeignKey(Post, blank=True, null=True, on_delete=models.CASCADE)
-    likeable_type = models.PositiveSmallIntegerField(choices=Likeable.choices)
+class CommentLike(models.Model):
+    comment_id = models.ForeignKey(Comment, related_name='likes',on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class PostLike(models.Model):
+    post_id = models.ForeignKey(Post, related_name='likes',on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Conversation(models.Model):

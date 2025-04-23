@@ -1,0 +1,250 @@
+[
+{
+    "model": "rabble.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$omq7ZEUzVOODirCcyeTWC1$qvrwaQDw+Gqz2hYKT6qMUfQjAGEC0e6LjSWXvh8hemg=",
+        "last_login": "2025-04-23T01:55:19.440Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-04-09T15:42:23.415Z",
+        "profile_pic": null,
+        "short_bio": null,
+        "interests": null,
+        "groups": [],
+        "user_permissions": [],
+        "follows": []
+    }
+},
+{
+    "model": "rabble.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$rpNH67sywhm6eFIRwV7xgo$7rxHDLpkLgPwlp2oWaoUNkyde0OJxHId2SRsALwQfhA=",
+        "last_login": "2025-04-23T02:08:10.615Z",
+        "is_superuser": false,
+        "username": "sam",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-23T00:49:42Z",
+        "profile_pic": "",
+        "short_bio": "",
+        "interests": "",
+        "groups": [],
+        "user_permissions": [],
+        "follows": []
+    }
+},
+{
+    "model": "rabble.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$2K5eTdd0jDqPIiuVTrsBCo$tcqNfRFvc7SOFTjFn9FQ2+81GBDQP52wlO20WBwicxg=",
+        "last_login": "2025-04-23T01:53:19.829Z",
+        "is_superuser": false,
+        "username": "alex",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-23T00:51:43Z",
+        "profile_pic": "",
+        "short_bio": "",
+        "interests": "",
+        "groups": [],
+        "user_permissions": [],
+        "follows": []
+    }
+},
+{
+    "model": "rabble.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$lVYJdgR6Z7UIZNqqY2jGqx$m+cZ3YJxUxOi2A++Ups5mPEYiKwuHyP0195YosxSBEk=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "chris",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-23T00:51:56Z",
+        "profile_pic": "",
+        "short_bio": "",
+        "interests": "",
+        "groups": [],
+        "user_permissions": [],
+        "follows": []
+    }
+},
+{
+    "model": "rabble.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$gZ4h0RPF903rDIy3jqtSXE$+jaDsOyG5zFzqIjDm4rFWwQ5M/ljC3ZEaqZytJVATWU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "morgan",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-23T00:52:15Z",
+        "profile_pic": "",
+        "short_bio": "",
+        "interests": "",
+        "groups": [],
+        "user_permissions": [],
+        "follows": []
+    }
+},
+{
+    "model": "rabble.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$OHvoSQCU7z1REtbWLarnOu$2TaOhhDdjP4wsCXwyMWe5dz4WTGUK8OUpqzQS4470lM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "drew",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-04-23T00:52:31Z",
+        "profile_pic": "",
+        "short_bio": "",
+        "interests": "",
+        "groups": [],
+        "user_permissions": [],
+        "follows": []
+    }
+},
+{
+    "model": "rabble.community",
+    "pk": 2,
+    "fields": {
+        "community_name": "default",
+        "owner": 2,
+        "admins": [
+            2
+        ],
+        "members": [
+            2
+        ]
+    }
+},
+{
+    "model": "rabble.subrabble",
+    "pk": 2,
+    "fields": {
+        "identifier": "cs-courses",
+        "subrabble_name": "CS Courses",
+        "description": "",
+        "visibility": 1,
+        "anon_permissions": false,
+        "community_id": 2
+    }
+},
+{
+    "model": "rabble.subrabble",
+    "pk": 3,
+    "fields": {
+        "identifier": "python",
+        "subrabble_name": "Python",
+        "description": "",
+        "visibility": 1,
+        "anon_permissions": false,
+        "community_id": 2
+    }
+},
+{
+    "model": "rabble.subrabble",
+    "pk": 4,
+    "fields": {
+        "identifier": "web-dev",
+        "subrabble_name": "Web Dev",
+        "description": "",
+        "visibility": 1,
+        "anon_permissions": false,
+        "community_id": 2
+    }
+},
+{
+    "model": "rabble.post",
+    "pk": 1,
+    "fields": {
+        "subrabble_id": 2,
+        "title": "Anyone taking CMSC 22000?",
+        "body": "Hi, was just wondering if anyone else is in this class.",
+        "user_id": 3,
+        "anon": false
+    }
+},
+{
+    "model": "rabble.post",
+    "pk": 2,
+    "fields": {
+        "subrabble_id": 2,
+        "title": "I'm taking CMSC 22000",
+        "body": "Hi everyone! I will be taking CMSC 22000. Nice to meet ya'll.",
+        "user_id": 6,
+        "anon": false
+    }
+},
+{
+    "model": "rabble.post",
+    "pk": 3,
+    "fields": {
+        "subrabble_id": 2,
+        "title": "Is the class CMSC 27900 hard?",
+        "body": "Just wondering!",
+        "user_id": 4,
+        "anon": false
+    }
+},
+{
+    "model": "rabble.comment",
+    "pk": 1,
+    "fields": {
+        "post_id": 1,
+        "author_id": 4,
+        "body": "Hi! I am taking CMSC 22000!",
+        "anon": false,
+        "parent_id": null
+    }
+},
+{
+    "model": "rabble.comment",
+    "pk": 2,
+    "fields": {
+        "post_id": 1,
+        "author_id": 5,
+        "body": "Me too!",
+        "anon": false,
+        "parent_id": null
+    }
+},
+{
+    "model": "rabble.comment",
+    "pk": 3,
+    "fields": {
+        "post_id": 1,
+        "author_id": 2,
+        "body": "Me three!",
+        "anon": false,
+        "parent_id": null
+    }
+}
+]
