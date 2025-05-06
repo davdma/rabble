@@ -154,7 +154,7 @@
         "description": "",
         "visibility": 1,
         "anon_permissions": false,
-        "community_id": 2
+        "community": 2
     }
 },
 {
@@ -166,7 +166,7 @@
         "description": "",
         "visibility": 1,
         "anon_permissions": false,
-        "community_id": 2
+        "community": 2
     }
 },
 {
@@ -178,17 +178,17 @@
         "description": "",
         "visibility": 1,
         "anon_permissions": false,
-        "community_id": 2
+        "community": 2
     }
 },
 {
     "model": "rabble.post",
     "pk": 1,
     "fields": {
-        "subrabble_id": 2,
+        "subrabble": 2,
         "title": "Anyone taking CMSC 22000?",
         "body": "Hi, was just wondering if anyone else is in this class.",
-        "user_id": 3,
+        "user": 3,
         "anon": false
     }
 },
@@ -196,10 +196,10 @@
     "model": "rabble.post",
     "pk": 2,
     "fields": {
-        "subrabble_id": 2,
+        "subrabble": 2,
         "title": "I'm taking CMSC 22000",
         "body": "Hi everyone! I will be taking CMSC 22000. Nice to meet ya'll.",
-        "user_id": 6,
+        "user": 6,
         "anon": false
     }
 },
@@ -207,10 +207,10 @@
     "model": "rabble.post",
     "pk": 3,
     "fields": {
-        "subrabble_id": 2,
+        "subrabble": 2,
         "title": "Is the class CMSC 27900 hard?",
         "body": "Just wondering!",
-        "user_id": 4,
+        "user": 4,
         "anon": false
     }
 },
@@ -218,33 +218,33 @@
     "model": "rabble.comment",
     "pk": 1,
     "fields": {
-        "post_id": 1,
-        "author_id": 4,
+        "post": 1,
+        "author": 4,
         "body": "Hi! I am taking CMSC 22000!",
         "anon": false,
-        "parent_id": null
+        "parent": null
     }
 },
 {
     "model": "rabble.comment",
     "pk": 2,
     "fields": {
-        "post_id": 1,
-        "author_id": 5,
+        "post": 1,
+        "author": 5,
         "body": "Me too!",
         "anon": false,
-        "parent_id": null
+        "parent": null
     }
 },
 {
     "model": "rabble.comment",
     "pk": 3,
     "fields": {
-        "post_id": 1,
-        "author_id": 2,
+        "post": 1,
+        "author": 2,
         "body": "Me three!",
         "anon": false,
-        "parent_id": null
+        "parent": null
     }
 }
 ]

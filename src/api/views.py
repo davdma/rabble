@@ -40,10 +40,10 @@ def post_list(request, identifier):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             # make sure that the post is associated with the subrabble
-            if 'subrabble_id' in request.data and request.data['subrabble_id'] != subrabble.id:
+            if 'subrabble' in request.data and int(request.data['subrabble']) != subrabble.id:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
 
-            serializer.save(subrabble_id=subrabble)
+            serializer.save(subrabble=subrabble)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -65,7 +65,7 @@ def post_detail(request, identifier, pk):
         serializer = PostSerializer(post, data=request.data, partial=True)
         if serializer.is_valid():
             # do not allow changing the subrabble of a post
-            if 'subrabble_id' in request.data and request.data['subrabble_id'] != subrabble.id:
+            if 'subrabble' in request.data and int(request.data['subrabble']) != subrabble.id:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             serializer.save()
             return Response(serializer.data)

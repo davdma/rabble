@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404  
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Community, Subrabble, Post
 from .forms import PostForm
@@ -23,8 +23,8 @@ def post_create(request, identifier):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.user_id = request.user
-            post.subrabble_id = subrabble
+            post.user = request.user
+            post.subrabble = subrabble
             form.save()
             return redirect("subrabble-detail", identifier=identifier)
     else:

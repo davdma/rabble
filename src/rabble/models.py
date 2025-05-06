@@ -23,41 +23,41 @@ class Subrabble(models.Model):
     description = models.TextField(blank=True)
     visibility = models.PositiveSmallIntegerField(choices=Visibility.choices)
     anon_permissions = models.BooleanField()
-    community_id = models.ForeignKey(Community, on_delete=models.CASCADE)
+    community = models.ForeignKey(Community, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ['community_id', 'identifier']
 
 class Post(models.Model):
-    subrabble_id = models.ForeignKey(Subrabble, on_delete=models.CASCADE)
+    subrabble = models.ForeignKey(Subrabble, on_delete=models.CASCADE)
     title = models.TextField()
     body = models.TextField()
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     anon = models.BooleanField()
 
 class Comment(models.Model):
-    post_id = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     anon = models.BooleanField()
-    parent_id = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
+    parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
 
 class CommentLike(models.Model):
-    comment_id = models.ForeignKey(Comment, related_name='likes',on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, related_name='likes',on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class PostLike(models.Model):
-    post_id = models.ForeignKey(Post, related_name='likes',on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='likes',on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Conversation(models.Model):
     title = models.TextField()
-    community_id = models.ForeignKey(Community, on_delete=models.CASCADE)
+    community = models.ForeignKey(Community, on_delete=models.CASCADE)
     users = models.ManyToManyField(User)
 
 class Message(models.Model):
-    conversation_id = models.ForeignKey(Conversation, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField()
     text = models.TextField()
 
