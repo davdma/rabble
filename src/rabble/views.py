@@ -35,7 +35,7 @@ def post_edit(request, identifier, pk):
     subrabble = get_object_or_404(Subrabble, identifier=identifier)
     post = get_object_or_404(Post, pk=pk)
     # not owner of the post!
-    if post.user_id != request.user:
+    if post.user != request.user:
         return redirect("post-detail", identifier=identifier, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)

@@ -16,7 +16,7 @@
             </h5>
             <p>{{ post.body }}</p>
             <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">By {% if not post.anon %}{{ post.user_id.username }}{% else %}anon{% endif %}</small>
+            <small class="text-muted">By {% if not post.anon %}{{ post.user.username }}{% else %}anon{% endif %}</small>
             <div>
                 <span class="me-3">
                 👍 <span class="badge bg-secondary">{{ post.likes.count }}</span>
