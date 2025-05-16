@@ -40,7 +40,7 @@ def post_list(request, identifier):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             # make sure that the post is associated with the subrabble
-            if 'subrabble' in request.data and int(request.data['subrabble']) != subrabble.id:
+            if 'subrabble' in request.data and request.data['subrabble'] != subrabble.subrabble_name:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
 
             serializer.save(subrabble=subrabble)
@@ -65,7 +65,7 @@ def post_detail(request, identifier, pk):
         serializer = PostSerializer(post, data=request.data, partial=True)
         if serializer.is_valid():
             # do not allow changing the subrabble of a post
-            if 'subrabble' in request.data and int(request.data['subrabble']) != subrabble.id:
+            if 'subrabble' in request.data and request.data['subrabble'] != subrabble.subrabble_name:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             serializer.save()
             return Response(serializer.data)
@@ -74,3 +74,29 @@ def post_detail(request, identifier, pk):
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def post_like(request, identifier, pk):
+    try:
+        subrabble = Subrabble.objects.get(identifier=identifier)
+        post = subrabble.post_set.get(pk=pk)
+    except Subrabble.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    except Post.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    user = request.data.get("user")
+    if not user:
+        return Response({"error": "User field is required."}, status=status.HTTP_400_BAD_REQUEST)
+    elif User.objects.filter(username=user).count() == 0:
+        return Response({"error": "User does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = User.objects.get(username=user)
+    if PostLike.objects.filter(post=post, user=user).exists():
+        # remove the like
+        PostLike.objects.filter(post=post, user=user).delete()
+        return Response({"liked": False, "like_count": PostLike.objects.filter(post=post).count()})
+
+    # add the like
+    PostLike.objects.create(post=post, user=user)
+    return Response({"liked": True, "like_count": PostLike.objects.filter(post=post).count()})

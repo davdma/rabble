@@ -8,6 +8,9 @@ class User(AbstractUser):
     interests = models.TextField(blank=True, null=True)
     follows = models.ManyToManyField("self", symmetrical=False, blank=True)
 
+    def __str__(self):
+        return self.username
+
 class Community(models.Model):
     community_name = models.TextField(unique=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -27,6 +30,9 @@ class Subrabble(models.Model):
 
     class Meta:
         unique_together = ['community_id', 'identifier']
+
+    def __str__(self):
+        return self.subrabble_name
 
 class Post(models.Model):
     subrabble = models.ForeignKey(Subrabble, on_delete=models.CASCADE)
