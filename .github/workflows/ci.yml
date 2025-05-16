@@ -24,3 +24,7 @@ jobs:
       - name: Check Django setup
         working-directory: src/
         run: python3 manage.py check
+
+      - name: Run Tests
+        working-directory: src/
+        run: pytest -v

@@ -14,10 +14,13 @@ import os
 from pathlib import Path
 import io
 from google.cloud import secretmanager
+import warnings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env(
+    SECRET_KEY=(str, "UNSECURE_KEY"),
+    DEBUG=(bool, True))
 env_file = os.path.join(BASE_DIR, '.env')
 
 if os.path.isfile(env_file):
@@ -32,7 +35,7 @@ elif os.environ.get('GOOGLE_CLOUD_PROJECT', None):
     payload = client.access_secret_version(name=name).payload.data.decode('UTF-8')
     env.read_env(io.StringIO(payload))
 else:
-    raise Exception('No local .env or GOOGLE_CLOUD_PROJECT detected. No secrets found.')
+    warnings.warn("No local .env, GOOGLE_CLOUD_PROJECT, or Heroku detected. Using unsecure values!")
 
 SECRET_KEY = env('SECRET_KEY')
 
