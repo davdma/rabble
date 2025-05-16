@@ -25,22 +25,22 @@ def test_post_post(api_client):
     subrabble = SubrabbleFactory.create()
     user = UserFactory.create()
     data = {
-        'subrabble': subrabble.id,
+        'subrabble': subrabble.identifier,
         'title': 'Test Post',
         'body': 'This is a test post',
         'anon': False,
-        'user': user.id
+        'user': user.username
     }
     response = api_client.post(reverse('post_list', args=[subrabble.identifier]), data)
     assert response.status_code == status.HTTP_201_CREATED
 
     # confirm that the post was created
     post = Post.objects.get(pk=response.data['id'])
-    assert post.subrabble == subrabble
+    assert post.subrabble.identifier == subrabble.identifier
     assert post.title == data['title']
     assert post.body == data['body']
     assert post.anon == data['anon']
-    assert post.user == user
+    assert post.user.username == user.username
 
 @pytest.mark.django_db
 def test_post_patch(api_client):
