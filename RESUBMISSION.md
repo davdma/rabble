@@ -1,3 +1,8 @@
+# HW 5 Resubmission
+* Rubric item: setting up continuous integration on Github
+    * I addressed the rubric item by adding a .github/workflows folder with ci.yml
+
+# HW 4 Resubmission
 * Rubric item: author and subRabble fields display a numeric key instead of a username/identifier
     * I addressed the rubric item by adding SlugRelatedField to the post serializer,
     now you can make POST requests using the username and subrabble name, and the fields

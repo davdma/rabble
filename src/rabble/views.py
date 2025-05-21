@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Community, Subrabble, Post
+from .models import Community, Subrabble, Post, PostLike
 from .forms import PostForm
 from django.shortcuts import redirect
 def index(request):
@@ -15,7 +15,9 @@ def subrabble_detail(request, identifier):
 def post_detail(request, identifier, pk):
     subrabble = get_object_or_404(Subrabble, identifier=identifier)
     post = Post.objects.get(pk=pk)
-    return render(request, "rabble/post_detail.html", {"subrabble": subrabble, "post": post})
+    # get like for the post from user if it exists otherwise set to None
+    like = PostLike.objects.filter(post=post, user=request.user).first()
+    return render(request, "rabble/post_detail.html", {"subrabble": subrabble, "post": post, "like": like})
 
 def post_create(request, identifier):
     subrabble = get_object_or_404(Subrabble, identifier=identifier)
